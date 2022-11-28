@@ -7,5 +7,6 @@ router.use(jsonParser);
 
 router.get('', controller.getUsers, (req, res) => {});
 router.post('/singup', controller.singUp, (req, res) => {});
+router.post('/login', controller.login, (req, res) => {});
 
 module.exports = router;

@@ -19,7 +19,18 @@ async function singUp(req, res) {
     }
 }
 
+async function login(req, res) {
+    try {
+        const response = await service.login(req, res);
+        return res.status(response.code).json(response);
+    } catch(error) {
+        console.log('pase por el catch login');
+        return res.status(401).json(error);
+    }
+}
+
 module.exports = {
     singUp,
-    getUsers
+    getUsers,
+    login
 }
