@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use('/v1/api/users', require('./routes/usersRouter'));
 app.use('/v1/api/box', require('./routes/boxRouter'));
+app.use('/actuator', require('./routes/health') )
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
