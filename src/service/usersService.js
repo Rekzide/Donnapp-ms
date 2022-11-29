@@ -39,9 +39,10 @@ async function login(req, rs) {
         const {username, pass} = req.body;
         const users = await db.collection('Usuarios')
         .where('username','==', username)
-        .where('pass','==',pass).get()
+        .where('pass','==',pass).limit(1).get()
         .then((data) => {
             return data.docs.map(doc => ({
+                id: doc.id,
                 username: doc.data().username,
                 name: doc.data().name,
                 lastname: doc.data().lastname,
@@ -52,9 +53,6 @@ async function login(req, rs) {
         console.log(users);
         if(users.length === 0){
             return {code:401, error: 'Usuario Inexistente'}
-        }
-        if(users.length> 1) {
-            return {code:401, error: 'Error en la busqueda'}
         }
         return {code: 200, user:   users[0]};
     } catch(e) {
